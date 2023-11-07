@@ -1,5 +1,5 @@
 <h1 align="center">
-  Cardboard
+  📦Cardboard📦
 </h1>
 <p align="center">
   Inventory made easy. Built with Flutter leveraging Material UI.
@@ -17,7 +17,7 @@
 
 ### Langkah-langkah Implementasi Tugas 7
 <details>
-<summary>Membuat proyek Flutter Baru</summary>
+<summary>Membuat Proyek Flutter Baru</summary>
 Untuk membuat proyek flutter, saya memasukkan command ini di terminal
   
 ```
