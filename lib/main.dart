@@ -1,4 +1,4 @@
-import 'package:cardboard/menu.dart';
+import 'package:cardboard/screens/menu.dart';
 import 'package:flutter/material.dart';
 
 void main() {
