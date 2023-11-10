@@ -1,4 +1,6 @@
+import 'package:cardboard/models/product.dart';
 import 'package:flutter/material.dart';
+import 'package:cardboard/globals.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
 
 class CardboardFormPage extends StatefulWidget {
@@ -11,7 +13,7 @@ class CardboardFormPage extends StatefulWidget {
 class _CardboardFormPageState extends State<CardboardFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
-  int _price = 0;
+  int _quantity = 0;
   String _description = "";
 
   @override
@@ -71,23 +73,23 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Price",
-                    labelText: "Price",
+                    hintText: "Amount",
+                    labelText: "Amount",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _price = int.parse(value!);
+                      _quantity = int.parse(value!);
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Price cannot be blank!";
+                      return "Amount cannot be blank!";
                     }
                     if (int.tryParse(value) == null) {
-                      return "Price should be an integer!";
+                      return "Amount should be an integer!";
                     }
                     return null;
                   },
@@ -126,7 +128,16 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                           MaterialStateProperty.all(Color(0xFFF8B3CA)),
                     ),
                     onPressed: () {
+                      // Create a new product instance
+                      Product newProduct = Product(
+                        name: _name,
+                        quantity: _quantity,
+                        description: _description,
+                      );
+                      // Add the new product to the global list
+                      globalProductList.add(newProduct);
                       if (_formKey.currentState!.validate()) {
+                        // Product instance
                         showDialog(
                           context: context,
                           builder: (context) {
@@ -137,7 +148,7 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Name: $_name'),
-                                    Text('Price: $_price'),
+                                    Text('Quantity: $_quantity'),
                                     Text('Description: $_description'),
                                   ],
                                 ),

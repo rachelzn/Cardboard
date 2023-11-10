@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'package:cardboard/screens/product_list.dart';
 import 'package:flutter/material.dart';
+import 'package:cardboard/globals.dart';
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/boardlist_form.dart';
 
@@ -50,6 +52,19 @@ class LeftDrawer extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => MyHomePage(),
                 ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.checklist),
+            title: const Text('My Product'),
+            // Redirection to ProductList
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ProductListPage(products: globalProductList)),
               );
             },
           ),

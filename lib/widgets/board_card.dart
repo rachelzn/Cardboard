@@ -1,10 +1,12 @@
+import 'package:cardboard/globals.dart';
+import 'package:cardboard/screens/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/boardlist_form.dart';
 
 class CardboardCard extends StatelessWidget {
   final CardboardItem item;
-  const CardboardCard(this.item, {super.key}); // Constructor
+  const CardboardCard(this.item, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,13 @@ class CardboardCard extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => CardboardFormPage()),
+            );
+          } else if (item.name == "My Product") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ProductListPage(products: globalProductList)),
             );
           } else {
             // Show SnackBar for other buttons
