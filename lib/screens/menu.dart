@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:cardboard/styles/colors.dart';
+import 'package:cardboard/styles/fonts.dart';
 import 'package:cardboard/widgets/board_card.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
   final List<CardboardItem> items = [
-    CardboardItem("My Product", Icons.checklist, const Color(0xFFF28582)),
-    CardboardItem(
-        "Add Product", Icons.add_shopping_cart, const Color(0xFF84A59E)),
-    CardboardItem("Logout", Icons.logout, const Color(0xFFF5BD60)),
+    CardboardItem("My Product", Icons.checklist, Colorz.avogreen),
+    CardboardItem("Add Product", Icons.add_shopping_cart, Colorz.pink),
+    CardboardItem("Logout", Icons.logout, Colorz.skyblue),
   ];
 
   // This widget is the home page of your application. It is stateful, meaning

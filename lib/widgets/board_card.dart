@@ -1,6 +1,7 @@
 import 'package:cardboard/globals.dart';
 import 'package:cardboard/screens/product_list.dart';
 import 'package:flutter/material.dart';
+import 'package:cardboard/styles/colors.dart';
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/boardlist_form.dart';
 
