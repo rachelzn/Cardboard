@@ -185,7 +185,7 @@ class CardboardCard extends StatelessWidget {
 ### Langkah-langkah Implementasi Tugas 8
 <details>
 <summary>Membuat Form 'Add Product'</summary>
-Saya membuat file baru dengan nama boardlist_form.dart dalam folder baru bernama screens di dalam direktori lib. TextFormField yang digunakan akan dibuat untuk menerima tiga elemen input: nama, jumlah, dan deskripsi.
+Saya membuat file baru dengan nama `boardlist_form.dart` dalam folder baru bernama screens di dalam direktori lib. `TextFormField` yang digunakan akan dibuat untuk menerima tiga elemen input: nama, jumlah, dan deskripsi.
 
 ```
 children: [
@@ -312,6 +312,7 @@ child: ElevatedButton(
 
 <details>
 <summary>Mengarahkan user ke halaman form penambahan produk saat mengklik tombol 'Add Product' di Home Page.</summary>
+  
 Saya menambahkan kode berikut ke dalam `board_list.dart`:
 
 ```
@@ -327,6 +328,7 @@ Saya menambahkan kode berikut ke dalam `board_list.dart`:
 
 <details>
 <summary>Menampilkan data dalam sebuah pop-up setelah mengklik tombol 'Save' di halaman 'Add Product'.</summary>
+  
 Saya menambahkan kode berikut ke dalam file `boardlist_form.dart` di dalam folder screens:
 
 ```
@@ -365,7 +367,8 @@ onPressed: () {
 </details>
 
 <details>
-<summary>Membuat drawer menu untuk navigasi</summary>
+<summary>Membuat drawer menu untuk navigasi.</summary>
+  
 Saya membuat file baru bernama `left_drawer.dart` di dalam direktori `lib/widgets` dan menambahkan kode berikut:
 
 ```
@@ -457,7 +460,7 @@ class LeftDrawer extends StatelessWidget {
 ```
 </details>
 
-### Navigator.push() vs, Navigator.pushReplacement()
+### Navigator.push() vs. Navigator.pushReplacement()
 `Navigator.push()` berfungsi untuk menambahkan rute baru ke tumpukan navigasi, memungkinkan user untuk menavigasi ke halaman baru dan juga kembali ke halaman sebelumnya menggunakan tombol kembali atau mekanisme serupa. Berikut contoh impelementasinya:
 
 ```
