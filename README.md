@@ -14,7 +14,7 @@
   - [Widget yang Digunakan dan Fungsinya](#widget-yang-digunakan-dan-fungsinya-masing-masing)
 - [Tugas 8](#📱tugas-8📱)
   - [Langkah-langkah Implementasi](#langkah-langkah-implementasi-tugas-8)
-  - [Navigator.push() vs, Navigator.pushReplacement()](#navigatorpush-vs-navigatorpushreplacement)
+  - [Navigator.push() vs. Navigator.pushReplacement()](#navigatorpush-vs-navigatorpushreplacement)
   - [Layout Widget pada Flutter](#layout-widget-pada-flutter)
   - [Penerapan Clean Architecture pada Aplikasi Flutter](#penerapan-clean-architecture-pada-aplikasi-flutter)
 
@@ -509,7 +509,7 @@ Pada tugas kali ini, saya menggunakan elemen input teks, yaitu TextFormField, ya
 Dalam Flutter, Clean Architecture melibatkan pengorganisasian kode ke dalam tiga lapisan (layer):
 1. **Presentation Layer**: Layer ini berisi komponen-komponen user interface (UI) dan berkomunikasi dengan domain layer untuk mendapatkan data. Di sini, developer dapat mengatur tampilan dan berinteraksi dengan domain layer untuk mendapatkan data. Presentation layer ini bertanggung jawab atas tampilan dan interaksi dengan user.
 
-2. **Domain Layer**: Layer ini mendefinisikan logika bisnis dan kasus user, menjaga independensi dan reusability. Ini adalah inti dari aplikasi yang berisi aturan bisnis. Domain layer dirancang untuk berdiri sendiri tanpa tergantung pada detail implementasi atau teknologi tertentu.
+2. **Domain Layer**: Layer ini mendefinisikan logika bisnis dan kasus user, menjaga independency dan reusability. Domain layer dirancang untuk berdiri sendiri tanpa tergantung pada detail implementasi atau teknologi tertentu.
 
 3. **Data Layer**: Layer ini mengelola sumber data dan repositori. Data layer berperan sebagai perantara antara domain layer dan sumber data sebenarnya seperti database, API, atau penyimpanan lokal. Selain itu, layer ini dapat mengimplementasikan logika pemetaan data, caching, dan komunikasi dengan sumber data eksternal.
 
