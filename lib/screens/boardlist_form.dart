@@ -73,8 +73,8 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Amount",
-                    labelText: "Amount",
+                    hintText: "Quantity",
+                    labelText: "Quantity",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -86,10 +86,10 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Amount cannot be blank!";
+                      return "Quantity cannot be blank!";
                     }
                     if (int.tryParse(value) == null) {
-                      return "Amount should be an integer!";
+                      return "Quantity must be an integer!";
                     }
                     return null;
                   },
@@ -164,6 +164,7 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                             );
                           },
                         );
+                        _formKey.currentState!.reset();
                       }
                     },
                     child: const Text(
