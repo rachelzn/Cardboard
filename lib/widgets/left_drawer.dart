@@ -2,7 +2,6 @@
 
 import 'package:cardboard/screens/product_list.dart';
 import 'package:flutter/material.dart';
-import 'package:cardboard/globals.dart';
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/boardlist_form.dart';
 
@@ -56,19 +55,6 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.checklist),
-            title: const Text('My Product'),
-            // Redirection to ProductList
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        ProductListPage(products: globalProductList)),
-              );
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.add_shopping_cart),
             title: const Text('Add Product'),
             // Bagian redirection ke ShopFormPage
@@ -76,6 +62,17 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => CardboardFormPage()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('My Cardboard'),
+            onTap: () {
+              // Route menu ke halaman produk
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
               );
             },
           ),

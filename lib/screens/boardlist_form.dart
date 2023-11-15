@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'package:cardboard/menu.dart';
 import 'package:cardboard/models/product.dart';
 import 'package:flutter/material.dart';
-import 'package:cardboard/globals.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class CardboardFormPage extends StatefulWidget {
   const CardboardFormPage({super.key});
@@ -13,11 +16,12 @@ class CardboardFormPage extends StatefulWidget {
 class _CardboardFormPageState extends State<CardboardFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
-  int _quantity = 0;
+  int _price = 0;
   String _description = "";
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -81,7 +85,7 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                   ),
                   onChanged: (String? value) {
                     setState(() {
-                      _quantity = int.parse(value!);
+                      _price = int.parse(value!);
                     });
                   },
                   validator: (String? value) {
@@ -127,43 +131,29 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                       backgroundColor:
                           MaterialStateProperty.all(Color(0xFFF8B3CA)),
                     ),
-                    onPressed: () {
-                      // Create a new product instance
-                      Product newProduct = Product(
-                        name: _name,
-                        quantity: _quantity,
-                        description: _description,
-                      );
-                      // Add the new product to the global list
-                      globalProductList.add(newProduct);
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        // Product instance
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Product Succesfully Saved'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Name: $_name'),
-                                    Text('Quantity: $_quantity'),
-                                    Text('Description: $_description'),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                        // Kirim ke Django dan tunggu respons
+                        //
+                        final response = await request.postJson(
+                            "http://127.0.0.1:8000/create-flutter/",
+                            jsonEncode(<String, String>{
+                              'name': _name,
+                              'price': _price.toString(),
+                              'description': _description,
+                            }));
+                        if (response['status'] == 'success') {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Product successfully saved."),
+                          ));
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content:
+                                Text("An error occured, please try again."),
+                          ));
+                        }
                         _formKey.currentState!.reset();
                       }
                     },

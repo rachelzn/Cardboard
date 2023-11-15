@@ -1,9 +1,10 @@
-import 'package:cardboard/globals.dart';
+import 'package:cardboard/screens/login.dart';
 import 'package:cardboard/screens/product_list.dart';
 import 'package:flutter/material.dart';
-import 'package:cardboard/styles/colors.dart';
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/boardlist_form.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class CardboardCard extends StatelessWidget {
   final CardboardItem item;
@@ -11,11 +12,12 @@ class CardboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Material(
       color: item.backgroundColor,
       child: InkWell(
         // Area responsive terhadap sentuhan
-        onTap: () {
+        onTap: () async {
           if (item.name == "Add Product") {
             Navigator.pushReplacement(
               context,
@@ -24,18 +26,32 @@ class CardboardCard extends StatelessWidget {
           } else if (item.name == "My Product") {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      ProductListPage(products: globalProductList)),
+              MaterialPageRoute(builder: (context) => const ProductPage()),
             );
-          } else {
-            // Show SnackBar for other buttons
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(
-                  content: Text("You've pressed the '${item.name}' button!")));
+          } else if (item.name == "Logout") {
+            final response =
+                await request.logout("http://127.0.0.1:8000/auth/logout/");
+            String message = response["message"];
+            if (response['status']) {
+              String uname = response["username"];
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("$message Sampai jumpa, $uname."),
+                ),
+              );
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("$message"),
+                ),
+              );
+            }
           }
-        },
+        }, // This closing bracket was missing
         child: Container(
           // Container untuk menyimpan Icon dan Text
           padding: const EdgeInsets.all(8),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cardboard/styles/colors.dart';
-import 'package:cardboard/styles/fonts.dart';
 import 'package:cardboard/widgets/board_card.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
 
@@ -26,7 +25,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Cardboard',
+          'Cardboard', 
         ),
       ),
       drawer: const LeftDrawer(),
