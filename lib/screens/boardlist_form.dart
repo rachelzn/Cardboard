@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:cardboard/menu.dart';
-import 'package:cardboard/models/product.dart';
+import 'package:cardboard/styles/colors.dart';
+import 'package:cardboard/styles/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -24,25 +24,21 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
     final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Add New Product',
-          ),
-        ),
-        backgroundColor: Color(0xFFF8B3CA),
-        foregroundColor: Colors.white,
-        /*leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+        /*
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colorz.black),
           onPressed: () {
-            if (Navigator.canPop(context)) {
-              Navigator.of(context).pop();
-            } else {
-              // Use the custom rightward slide route
-              Navigator.of(context).pushReplacement(_createRightSlideRoute());
-            }
+            // Navigator.pop(context);
           },
         ),*/
+        title: Text(
+          'Add New Item',
+          style: Fontz.B28,
+        ),
+        backgroundColor: Colorz.beigebg,
+        foregroundColor: Colorz.black,
       ),
+      backgroundColor: Colorz.beigebg,
       drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,
@@ -50,14 +46,15 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 16.0),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Product Name",
-                    labelText: "Product Name",
+                    hintText: "name...",
+                    labelText: "item name",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -67,20 +64,21 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Name cannot be empty!";
+                      return "name cannot be blank!";
                     }
                     return null;
                   },
                 ),
               ),
+              /*const SizedBox(height: 16.0),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Quantity",
-                    labelText: "Quantity",
+                    hintText: "quantity...",
+                    labelText: "quantity",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -90,23 +88,24 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Quantity cannot be blank!";
+                      return "quantity cannot be blank!";
                     }
                     if (int.tryParse(value) == null) {
-                      return "Quantity must be an integer!";
+                      return "quantity must be an integer!";
                     }
                     return null;
                   },
                 ),
-              ),
+              ),*/
+              const SizedBox(height: 16.0),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Description",
-                    labelText: "Description",
+                    hintText: "enter item description...",
+                    labelText: "description",
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
                   onChanged: (String? value) {
@@ -116,25 +115,69 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Description cannot be blank!";
+                      return "description cannot be blank!";
                     }
                     return null;
                   },
                 ),
               ),
+              const SizedBox(height: 16.0),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          if (_price > 1) {
+                            _price--;
+                          }
+                        });
+                      },
+                      child: Icon(Icons.remove, color: Colorz.black),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        padding: EdgeInsets.all(12.0),
+                        primary: Colorz.avogreen,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Text(_price.toString(),
+                          style: TextStyle(fontSize: 18.0)),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _price++;
+                        });
+                      },
+                      child: Icon(Icons.add, color: Colorz.black),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        padding: EdgeInsets.all(12.0),
+                        primary: Colorz.avogreen,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Color(0xFFF8B3CA)),
+                      backgroundColor: MaterialStateProperty.all(Colorz.black),
+                      minimumSize: MaterialStateProperty.all(Size(380, 48)),
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         // Kirim ke Django dan tunggu respons
-                        //
                         final response = await request.postJson(
                             "http://127.0.0.1:8000/create-flutter/",
                             jsonEncode(<String, String>{
@@ -159,7 +202,7 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                     },
                     child: const Text(
                       "Save",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colorz.avogreen),
                     ),
                   ),
                 ),

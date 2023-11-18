@@ -16,19 +16,18 @@ class CardboardCard extends StatelessWidget {
     return Material(
       color: item.backgroundColor,
       child: InkWell(
-        // Area responsive terhadap sentuhan
         onTap: () async {
-          if (item.name == "Add Product") {
+          if (item.name == "add item") {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (context) => CardboardFormPage()),
             );
-          } else if (item.name == "My Product") {
+          } else if (item.name == "my cardboard") {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const ProductPage()),
             );
-          } else if (item.name == "Logout") {
+          } else if (item.name == "logout") {
             final response =
                 await request.logout("http://127.0.0.1:8000/auth/logout/");
             String message = response["message"];
@@ -50,10 +49,14 @@ class CardboardCard extends StatelessWidget {
                 ),
               );
             }
+          } else {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(
+                  SnackBar(content: Text("You've pressed the ${item.name}!")));
           }
-        }, // This closing bracket was missing
+        },
         child: Container(
-          // Container untuk menyimpan Icon dan Text
           padding: const EdgeInsets.all(8),
           child: Center(
             child: Column(
@@ -61,14 +64,17 @@ class CardboardCard extends StatelessWidget {
               children: [
                 Icon(
                   item.icon,
-                  color: Colors.white,
+                  color: item.iconColor,
                   size: 30.0,
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: item.iconColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),

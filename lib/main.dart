@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           return request;
         },
         child: MaterialApp(
-          title: 'Flutter Demo',
+          title: 'Cardboard',
           theme: ThemeData(
             // This is the theme of your application.
             //
@@ -37,8 +37,23 @@ class MyApp extends StatelessWidget {
             //
             // This works for code too, not just values: Most code changes can be
             // tested with just a hot reload.
-            colorScheme: ColorScheme.fromSeed(seedColor: Colorz.black),
+            // Define the color scheme for your app
+            // Define the color scheme for your app
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colorz.black,
+              // You can adjust other color scheme properties if needed
+            ),
             useMaterial3: true,
+
+            // Set the cursor color for all text fields
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: Colorz.ashbrown,
+            ),
+
+            // Set the input decoration theme
+            // inputDecorationTheme: InputDecorationTheme(
+            // Define other properties for input decorations if needed
+            //), */
           ),
           home: LoginPage(),
         ));
