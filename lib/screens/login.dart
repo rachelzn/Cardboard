@@ -1,4 +1,5 @@
 import 'package:cardboard/screens/menu.dart';
+import 'package:cardboard/screens/register.dart';
 import 'package:cardboard/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -190,7 +191,12 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.only(top: 30.0),
                   child: InkWell(
                     onTap: () {
-                      // action for Sign Up/Register
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                RegisterPage()), // Navigate to RegisterPage
+                      );
                     },
                     child: RichText(
                       text: TextSpan(
@@ -198,12 +204,15 @@ class _LoginPageState extends State<LoginPage> {
                           color: Colorz.ashbrown,
                         ),
                         children: <TextSpan>[
-                          TextSpan(text: "Don't have an account yet? "),
+                          TextSpan(
+                              text: "Don't have an account yet? ",
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                           TextSpan(
                             text: 'Sign Up',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colorz.black,
+                              decoration: TextDecoration.underline,
                             ),
                           ),
                         ],
