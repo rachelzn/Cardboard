@@ -1,3 +1,4 @@
+import 'package:cardboard/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:cardboard/styles/colors.dart';
 import 'package:cardboard/styles/fonts.dart';
@@ -101,20 +102,35 @@ class MyHomePage extends StatelessWidget {
                 ),
                 // Cards
                 Container(
-                  child: GridView.count(
-                    primary: false, // prevents GridView from being scrollable
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 2,
-                    shrinkWrap:
-                        true, // fits the GridView into the available space
-                    children: items.map((CardboardItem item) {
-                      return ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: CardboardCard(item),
+                  height: 200, // Adjust the height
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        width: 200, // Adjust the width
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 3,
+                                  offset: Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20.0),
+                              child: CardboardCard(items[index]),
+                            ),
+                          ),
+                        ),
                       );
-                    }).toList(),
+                    },
                   ),
                 ),
               ],
@@ -150,6 +166,7 @@ class MyHomePage extends StatelessWidget {
         ),
         backgroundColor: Colorz.darkgreen,
       ),
+      //bottomNavigationBar: BottomAppBarWidget(),
     );
   }
 }
