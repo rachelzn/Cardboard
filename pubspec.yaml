@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.6
   pbp_django_auth: ^0.3.1
   provider: ^6.1.1
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:

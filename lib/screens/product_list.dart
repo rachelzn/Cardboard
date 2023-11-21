@@ -1,5 +1,6 @@
 import 'package:cardboard/styles/colors.dart';
 import 'package:cardboard/styles/fonts.dart';
+import 'package:cardboard/widgets/bottom_bar.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -80,9 +81,8 @@ class _ProductPageState extends State<ProductPage> {
           IconButton(
             icon: Icon(Icons.filter_list_sharp),
             onPressed: () {
-              // Implement the filter functionality here
-              // This could open a dialog or navigate to a new screen for selecting the alphabet filter.
-              // Example: Navigator.push(context, MaterialPageRoute(builder: (context) => AlphabetFilterScreen()));
+              // Implement the filter:
+              // Navigator.push(context, MaterialPageRoute(builder: (context) => AlphabetFilterScreen()));
             },
           ),
         ],

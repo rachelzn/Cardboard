@@ -121,6 +121,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       prefixIcon: Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          // change the icon based on the password visibility
+                          _passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          // password visibility state
+                          setState(() {
+                            _passwordVisible = !_passwordVisible;
+                          });
+                        },
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(25.0),
                       ),

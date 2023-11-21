@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:cardboard/styles/colors.dart';
 import 'package:cardboard/styles/fonts.dart';
+import 'package:cardboard/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
