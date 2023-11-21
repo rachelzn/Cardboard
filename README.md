@@ -528,7 +528,7 @@ Penggunaan ketiga layer ini bertujuan untuk meningkatkan modularity, maintenance
 
 
 ## 📱Tugas 9📱
-### langkah-langkah Implementasi Tugas 9
+### Langkah-langkah Implementasi Tugas 9
 <details>
 <summary>Membuat Custom Model</summary>
 
@@ -644,7 +644,7 @@ class MyApp extends StatelessWidget {
 Setelah menyelesaikan integrasi, saya membuat page baru bernama `login.dart` sebagai login page dari app ini:
     <details>
     <summary> login.dart setelah styling </summary>
-    
+
     ```
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/register.dart';
@@ -878,6 +878,7 @@ class _LoginPageState extends State<LoginPage> {
 }
     ```
   </details>
+
   Kemudian, mengubah `home: MyHomePage()` menjadi `home: LoginPage()` agar memunculkan login page pertama kali ketika app di run.
 </details>
 <details>
