@@ -129,7 +129,7 @@ class _CardboardFormPageState extends State<CardboardFormPage> {
                     ElevatedButton(
                       onPressed: () {
                         setState(() {
-                          if (_price > 1) {
+                          if (_price > 0) {
                             _price--;
                           }
                         });

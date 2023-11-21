@@ -20,10 +20,11 @@ class MyHomePage extends StatelessWidget {
     //final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        /*
         title: const Text(
           'Cardboard',
           style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+        ),*/
         backgroundColor: Colorz.darkgreen,
         foregroundColor: Colorz.pink,
       ),
@@ -76,7 +77,7 @@ class MyHomePage extends StatelessWidget {
                       // controller: _searchController,
                       style: TextStyle(color: Colorz.black),
                       decoration: InputDecoration(
-                        hintText: "Search",
+                        hintText: "search my cardboard...",
                         hintStyle: TextStyle(color: Colorz.ashbrown),
                         filled: true,
                         fillColor: Colorz.beigebg, // fill the textfield
@@ -98,7 +99,6 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Cards
                 // Cards
                 Container(
                   child: GridView.count(

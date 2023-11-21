@@ -1,6 +1,7 @@
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/register.dart';
 import 'package:cardboard/styles/colors.dart';
+import 'package:cardboard/styles/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';

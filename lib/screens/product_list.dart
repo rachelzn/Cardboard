@@ -76,6 +76,16 @@ class _ProductPageState extends State<ProductPage> {
         ),
         backgroundColor: Colorz.beigebg,
         foregroundColor: Colorz.black,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.filter_list_sharp),
+            onPressed: () {
+              // Implement the filter functionality here
+              // This could open a dialog or navigate to a new screen for selecting the alphabet filter.
+              // Example: Navigator.push(context, MaterialPageRoute(builder: (context) => AlphabetFilterScreen()));
+            },
+          ),
+        ],
       ),
       drawer: const LeftDrawer(),
       backgroundColor: Colorz.beigebg,
