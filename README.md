@@ -640,9 +640,11 @@ class MyApp extends StatelessWidget {
 </details>
 <details>
 <summary>Membuat Login Page</summary>
+
 Setelah menyelesaikan integrasi, saya membuat page baru bernama `login.dart` sebagai login page dari app ini:
     <details>
     <summary> login.dart setelah styling </summary>
+    
     ```
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/register.dart';
@@ -880,7 +882,8 @@ class _LoginPageState extends State<LoginPage> {
 </details>
 <details>
 <summary>Menampikan Product List (Fetch Data dari Django)</summary>
-Pertama, saya menjalankan command `flutter pub add http`. Kemudian, pada file baru di lib/screens bernama ` product_list.dart`, saya menambahkan code untuk menampilkan list dari product yang sudah di-input.
+
+Pertama, saya menjalankan command `flutter pub add http`. Kemudian, pada file baru di lib/screens bernama ` product_list.dart`, saya menambahkan code untuk menampilkan list dari product yang sudah di-input:
   <details>
   <summary>product_list.dart sebelum styling</summary>
 
