@@ -66,8 +66,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextButton(
                   child: const Text('OK'),
                   onPressed: () {
-                    Navigator.pop(context); // Dismiss dialog
-                    Navigator.pop(context); // Back to login page
+                    Navigator.of(context).pop(); // Dismiss dialog
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              LoginPage()), // Navigate to login page
+                    );
                   },
                 ),
               ],
@@ -225,12 +229,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 18.0),
                 ElevatedButton(
+                  /*
                   onPressed: () async {
                     String username = _usernameController.text;
                     String password = _passwordController.text;
                     String passwordConfirmation =
                         _passwordConfirmationController.text;
 
+                    
                     // Perform input validation
                     if (username.isEmpty ||
                         password.isEmpty ||
@@ -312,7 +318,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       );
                     }
-                  },
+                  },*/
                   child: const Text(
                     'Sign up',
                     style: TextStyle(
@@ -325,6 +331,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     minimumSize: Size(385, 50),
                     backgroundColor: Colorz.black,
                   ),
+                  onPressed: () {
+                    registerUser();
+                  },
                 ),
                 SizedBox(height: 16.0),
                 Text(

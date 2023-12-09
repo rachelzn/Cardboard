@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:cardboard/models/product.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
@@ -19,7 +21,8 @@ class _ProductPageState extends State<ProductPage> {
   List<Product> _filteredProducts = [];
 
   Future<List<Product>> fetchProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/json/');
+    final request = context.watch<CookieRequest>();
+    var url = Uri.parse('http://127.0.0.1:8000/get-user-product-json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -152,13 +155,15 @@ class _ProductPageState extends State<ProductPage> {
                       ],
                     ),
                   );
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
                 } else {
                   _filteredProducts =
                       snapshot.data; // Initialize with all products
                   return ListView.builder(
-                    itemCount: _filteredProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = _filteredProducts[index];
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (_, index) {
+                      final product = snapshot.data![index];
                       return Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
