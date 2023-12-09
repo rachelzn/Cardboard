@@ -1,8 +1,8 @@
+import 'dart:convert';
+
 import 'package:cardboard/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:cardboard/styles/colors.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class RegisterApp extends StatelessWidget {
 }
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key});
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -38,15 +38,96 @@ class _RegisterPageState extends State<RegisterPage> {
       TextEditingController();
   bool _passwordVisible = false;
 
+  Future<void> registerUser() async {
+    String username = _usernameController.text;
+    String password = _passwordController.text;
+
+    try {
+      final response = await http.post(
+        Uri.parse('http://127.0.0.1:8000/auth/register_flutter/'),
+        body: {
+          'username': username,
+          'password': password,
+        },
+      );
+
+      // Check if the response is JSON
+      if (response.headers['content-type']?.contains('application/json') ??
+          false) {
+        final result = json.decode(response.body);
+        if (response.statusCode == 201) {
+          // Handle successful registration
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Registration Successful'),
+              content: Text(result['message']),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context); // Dismiss dialog
+                    Navigator.pop(context); // Back to login page
+                  },
+                ),
+              ],
+            ),
+          );
+        } else {
+          // Handle other statuses
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Registration Failed'),
+              content: Text(result['message'] ?? 'Unknown error'),
+              actions: <Widget>[
+                TextButton(
+                  child: const Text('OK'),
+                  onPressed: () {
+                    Navigator.pop(context); // Dismiss dialog
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+      } else {
+        // The response is not JSON. Likely an HTML error page.
+        print(response.body);
+        print(response.statusCode);
+        throw Exception('Received invalid response format from the server');
+      }
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Registration Failed'),
+          content: SingleChildScrollView(
+            child: Text(
+              'An error occurred: ${e.toString()}',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.pop(context); // Dismiss dialog
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Register',
+          'Create an account',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colorz.darkgreen,
@@ -233,7 +314,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                   },
                   child: const Text(
-                    'Sign Up',
+                    'Sign up',
                     style: TextStyle(
                       color: Colorz.avogreen,
                       fontSize: 16,
@@ -262,7 +343,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     );
                   },
                   child: Text(
-                    'Login',
+                    'Sign in',
                     style: TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.bold,
