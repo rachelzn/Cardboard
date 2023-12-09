@@ -1,7 +1,6 @@
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/register.dart';
 import 'package:cardboard/styles/colors.dart';
-import 'package:cardboard/styles/fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login',
+      title: 'Sign in',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -45,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Login',
+          'Sign in',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colorz.darkgreen,
@@ -175,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                     }
                   },
                   child: const Text(
-                    'Login',
+                    'Sign in',
                     style: TextStyle(
                       color: Colorz.avogreen,
                       fontSize: 16,
@@ -187,37 +186,29 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Colorz.black,
                   ),
                 ),
-                const SizedBox(height: 20.0),
-                Padding(
-                  padding: const EdgeInsets.only(top: 30.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                RegisterPage()), // Navigate to RegisterPage
-                      );
-                    },
-                    child: RichText(
-                      text: TextSpan(
-                        style: TextStyle(
-                          color: Colorz.ashbrown,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: "Don't have an account yet? ",
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(
-                            text: 'Sign Up',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colorz.black,
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ],
-                      ),
+                SizedBox(height: 20.0),
+                Text(
+                  "Don't have an account yet?",
+                  style: TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              RegisterPage()), // Navigate to sign up page
+                    );
+                  },
+                  child: Text(
+                    'Sign up',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colorz.black,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),

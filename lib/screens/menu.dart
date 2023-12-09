@@ -1,9 +1,12 @@
+import 'package:cardboard/screens/login.dart';
 import 'package:cardboard/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:cardboard/styles/colors.dart';
 import 'package:cardboard/styles/fonts.dart';
 import 'package:cardboard/widgets/board_card.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -13,7 +16,6 @@ class MyHomePage extends StatelessWidget {
     CardboardItem("add item", Icons.add_box, Colorz.orange, Colorz.lightbeige),
     CardboardItem(
         "count stock", Icons.qr_code_scanner, Colorz.avogreen, Colorz.orange),
-    CardboardItem("logout", Icons.logout, Colorz.darkgreen, Colorz.skyblue),
   ];
 
   @override
@@ -21,11 +23,10 @@ class MyHomePage extends StatelessWidget {
     //final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        /*
         title: const Text(
           'Cardboard',
           style: TextStyle(fontWeight: FontWeight.bold),
-        ),*/
+        ),
         backgroundColor: Colorz.darkgreen,
         foregroundColor: Colorz.pink,
       ),
@@ -139,34 +140,36 @@ class MyHomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                height: 300, // height of bottom sheet
-                decoration: BoxDecoration(
-                  color: Colorz.beigebg, // background color of the bottom sheet
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(20.0)),
-                ),
-                child: Center(
-                  child: Text(
-                    'Bottom Sheet Content',
-                    style: Fontz.B15,
-                  ),
-                ),
-              );
-            },
-          );
+        onPressed: () async {
+          final request = context.read<CookieRequest>();
+          final response =
+              await request.logout("http://127.0.0.1:8000/auth/logout/");
+          String message = response["message"];
+          if (response['status']) {
+            String uname = response["username"];
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("$message Sampai jumpa, $uname."),
+              ),
+            );
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Logout gagal: $message"),
+              ),
+            );
+          }
         },
         child: Icon(
-          Icons.add,
-          color: Colorz.avogreen,
+          Icons.logout,
+          color: Colorz.darkgreen,
         ),
-        backgroundColor: Colorz.darkgreen,
+        backgroundColor: Colorz.skyblue,
       ),
-      //bottomNavigationBar: BottomAppBarWidget(),
     );
   }
 }

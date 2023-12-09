@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
               // Adjust other color scheme properties if needed
             ),
             useMaterial3: true,
-
             // Set the cursor color for all text fields
             textSelectionTheme: TextSelectionThemeData(
               cursorColor: Colorz.ashbrown,

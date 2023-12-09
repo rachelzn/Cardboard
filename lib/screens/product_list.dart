@@ -1,6 +1,6 @@
 import 'package:cardboard/styles/colors.dart';
 import 'package:cardboard/styles/fonts.dart';
-import 'package:cardboard/widgets/bottom_bar.dart';
+// import 'package:cardboard/widgets/bottom_bar.dart';
 import 'package:cardboard/widgets/left_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -144,8 +144,9 @@ class _ProductPageState extends State<ProductPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Data doesn't exist.",
-                          style: TextStyle(color: Colorz.black, fontSize: 20),
+                          "No product yet",
+                          style:
+                              TextStyle(color: Colorz.ashbrown, fontSize: 20),
                         ),
                         SizedBox(height: 8),
                       ],

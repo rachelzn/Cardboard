@@ -1,10 +1,7 @@
-import 'package:cardboard/screens/login.dart';
 import 'package:cardboard/screens/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:cardboard/screens/menu.dart';
 import 'package:cardboard/screens/boardlist_form.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 
 class CardboardCard extends StatelessWidget {
   final CardboardItem item;
@@ -12,11 +9,10 @@ class CardboardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final request = context.watch<CookieRequest>();
     return Material(
       color: item.backgroundColor,
       child: InkWell(
-        onTap: () async {
+        onTap: () {
           if (item.name == "add item") {
             Navigator.pushReplacement(
               context,
@@ -27,28 +23,6 @@ class CardboardCard extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => const ProductPage()),
             );
-          } else if (item.name == "logout") {
-            final response =
-                await request.logout("http://127.0.0.1:8000/auth/logout/");
-            String message = response["message"];
-            if (response['status']) {
-              String uname = response["username"];
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("$message Sampai jumpa, $uname."),
-                ),
-              );
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
-              );
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("$message"),
-                ),
-              );
-            }
           } else {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
